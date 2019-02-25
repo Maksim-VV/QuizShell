@@ -23,13 +23,15 @@ public class ShellServiceImpl implements ShellService {
         this.quizRunner = quizRunner;
         quizRunner.loadQuizData();
         dataQuiz = quizRunner.getDataQuiz();
+        System.err.println("\n" + quizRunner.getHelloText() + "\n");
+    }
 
+    ShellServiceImpl() {
     }
 
 
     @Override
     public String quiz(String start) {
-
         return quizRunner.getSuranameQuest();
     }
 
@@ -42,30 +44,26 @@ public class ShellServiceImpl implements ShellService {
     @Override
     public String name(String name) {
         quizRunner.setStudentName(name);
-        return quizRunner.getStartQuizText() + getQuestion(numQuest);
+        return quizRunner.getStartQuizText() + getQuestion();
     }
 
     @Override
     public String anser(String value) {
 
-        if(numQuest == 0)
-        {
-          return "";
+        if (numQuest == 0) {
+            return "";
         }
-
         if (numQuest >= dataQuiz.size()) {
             return quizRunner.getTotalResult(rightAnswer);
         }
-
         if (value != null &&
-                value.equals(dataQuiz.get(numQuest-1).getCorrectAnswer())) {
+                value.equals(dataQuiz.get(numQuest - 1).getCorrectAnswer())) {
             rightAnswer++;
         }
-
-        return getQuestion(numQuest);
+        return getQuestion();
     }
 
-    private String getQuestion(int countQuest) {
+    private String getQuestion() {
         StringBuffer questStr = new StringBuffer();
         questStr.append(dataQuiz.get(numQuest).getNumberQuestion()).append(" ");
         questStr.append(dataQuiz.get(numQuest).getQuestion()).append(" : ");

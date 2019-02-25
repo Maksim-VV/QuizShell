@@ -36,6 +36,10 @@ public class DataReaderImp implements DataReader {
         this.fileName = String.format(prop.getUrl(), quizLocal.getLocale());
     }
 
+    public DataReaderImp() {
+
+    }
+
 
     public List<Question> readData() {
         ClassLoader classLoader = getClass().getClassLoader();

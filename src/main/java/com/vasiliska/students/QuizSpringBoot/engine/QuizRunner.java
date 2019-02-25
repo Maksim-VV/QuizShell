@@ -25,6 +25,7 @@ public class QuizRunner {
     private String suranameQuest;
     private String nameQuest;
     private String startQuizText;
+    private String helloText;
     private Student student;
 
     private MessageSource messageSource;
@@ -39,6 +40,11 @@ public class QuizRunner {
         student = new Student();
         setStudentPersonalData();
         startQuizText = messageSource.getMessage("startQuiz", null, locale);
+        helloText = messageSource.getMessage("helloMsg", null, locale);
+    }
+
+    public QuizRunner() {
+
     }
 
     public void setStudentName(String name) {
@@ -61,6 +67,10 @@ public class QuizRunner {
         if (dataQuiz != null) {
             countQuest = dataQuiz.size();
         }
+        else {
+            log.error("dataQuiz is null ");
+            return "";
+        }
 
         return (messageSource.getMessage("finishQuiz", new String[]{student.getName(),
                 String.valueOf(student.getScore()), String.valueOf(countQuest)}, locale));
@@ -70,7 +80,6 @@ public class QuizRunner {
         try {
             dataQuiz = data.readData();
         } catch (Exception ex) {
-            System.out.println(messageSource.getMessage("errorLoadQuiz", null, locale));
             log.error("Error loading the list of questions {}", ex);
         }
 
