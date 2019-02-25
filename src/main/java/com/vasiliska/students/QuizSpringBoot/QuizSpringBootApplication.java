@@ -9,7 +9,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 @SpringBootApplication
 @EnableConfigurationProperties(AppProp.class)
 public class QuizSpringBootApplication {
-                                             
 
     public static void main(String[] args) {
                 SpringApplication.run(QuizSpringBootApplication.class, args);
