@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.util.ArrayList;
 
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ContextConfiguration(classes = com.vasiliska.students.QuizSpringBoot.service.QuizTestConfig.class)
@@ -21,13 +20,17 @@ public class DataReaderImpTest {
 
     @Autowired
     DataReaderImp dataReaderImp;
+    private final String FILE_NAME = "quizTesten_US.csv";
+
+
 
     @Test
-        public void dataTest() {
+    public void dataTest() {
         dataReaderImp.setQuestList(new ArrayList<Question>());
-        dataReaderImp.setFileName("quizTesten_US.csv");
-        int sizeTest =  dataReaderImp.readData().size();
+        dataReaderImp.setFileName(FILE_NAME);
+        dataReaderImp.setQuestList(new ArrayList<Question>());
+        int sizeTest = dataReaderImp.readData().size();
         Assert.assertEquals(sizeTest, 6);
-        }
+    }
 
 }

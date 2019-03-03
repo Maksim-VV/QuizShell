@@ -17,51 +17,66 @@ public class ShellServiceImpl implements ShellService {
     private int rightAnswer = 0;
     private List<Question> dataQuiz;
     private final String SEPARATOR_STR = "; ";
+    private boolean isStart = false;
+    private String messageText;
 
     @Autowired
     ShellServiceImpl(QuizRunner quizRunner) {
         this.quizRunner = quizRunner;
         quizRunner.loadQuizData();
         dataQuiz = quizRunner.getDataQuiz();
-        System.err.println("\n" + quizRunner.getHelloText() + "\n");
+        messageText = quizRunner.getHelloText();
+        System.err.println("\n" + messageText + "\n");
     }
 
     ShellServiceImpl() {
     }
 
+    @Override
+    public String getMessage() {
+        return messageText;
+    }
 
     @Override
-    public String quiz(String start) {
-        return quizRunner.getSuranameQuest();
+    public String start() {
+        messageText = quizRunner.getSuranameQuest();
+        return messageText;
     }
+
 
     @Override
     public String surname(String surname) {
         quizRunner.setStudentSurname(surname);
-        return quizRunner.getNameQuest();
+        messageText = quizRunner.getNameQuest();
+        return messageText;
     }
 
     @Override
     public String name(String name) {
         quizRunner.setStudentName(name);
-        return quizRunner.getStartQuizText() + getQuestion();
+        messageText = quizRunner.getStartQuizText() + getQuestion();
+        return messageText;
     }
 
     @Override
     public String anser(String value) {
 
         if (numQuest == 0) {
-            return "";
+            messageText = "";
+            return messageText;
         }
         if (numQuest >= dataQuiz.size()) {
-            return quizRunner.getTotalResult(rightAnswer);
+            messageText = quizRunner.getTotalResult(rightAnswer);
+            return messageText;
         }
         if (value != null &&
                 value.equals(dataQuiz.get(numQuest - 1).getCorrectAnswer())) {
             rightAnswer++;
         }
-        return getQuestion();
+        messageText = getQuestion();
+        return messageText;
     }
+
 
     private String getQuestion() {
         StringBuffer questStr = new StringBuffer();
@@ -74,6 +89,7 @@ public class ShellServiceImpl implements ShellService {
         numQuest++;
         return questStr.toString();
     }
+
 
 }
 

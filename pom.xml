@@ -5,9 +5,9 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.20.BUILD-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>2.0.3.RELEASE</version>
     </parent>
+
     <groupId>com.vasiliska.students</groupId>
     <artifactId>QuizShell</artifactId>
     <version>0.0.1-SNAPSHOT</version>
